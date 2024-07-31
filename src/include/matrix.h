@@ -22,6 +22,8 @@ class Matrix {
   Matrix operator-(const Matrix&) const;
   float *operator[](size_t rows) const;
 
+  Matrix transpose() const;
+
   void randomise(float, float);
 
   const std::string format() const;

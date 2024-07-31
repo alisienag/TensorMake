@@ -23,7 +23,7 @@ Matrix Matrix::dot(const Matrix &other) const {
 }
 
 Matrix Matrix::mul(const Matrix &other) const {
-  int block_size = 2;
+  int block_size = 32;
 
   if (this->rows() != other.rows() || this->cols() != other.cols()) {
     std::string error_message = "Matrix multiplication: " + this->shape() +
@@ -105,6 +105,17 @@ Matrix Matrix::operator-(const Matrix &other) const {
   } else {
     for (int i = 0; i < this->rowCount * this->colCount; i++) {
       result.getData()[i] = this->data[i] - other.getData()[i];
+    }
+  }
+
+  return result;
+}
+
+Matrix Matrix::transpose() const {
+  Matrix result(this->colCount, this->rowCount);
+  for (int i = 0; i < this->colCount; i++) {
+    for (int j = 0; j < this->rowCount; j++) {
+      result[j][i] = (*this)[i][j];
     }
   }
 
