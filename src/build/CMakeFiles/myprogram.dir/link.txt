@@ -1,1 +1,1 @@
-/usr/bin/c++ -Wall -Wextra -O3 CMakeFiles/myprogram.dir/main.cpp.o CMakeFiles/myprogram.dir/matrix.cpp.o -o myprogram
+/Library/Developer/CommandLineTools/usr/bin/c++ -Wall -Wextra -O3 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/myprogram.dir/main.cpp.o CMakeFiles/myprogram.dir/matrix.cpp.o -o myprogram

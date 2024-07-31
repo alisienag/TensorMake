@@ -3,12 +3,14 @@
 Matrix::Matrix(size_t rows, size_t columns) {
   this->rowCount = rows;
   this->colCount = columns;
+  //this->data = reinterpret_cast<float*>(malloc(sizeof(float) * rows * columns));
   this->data = new float[rows * columns];
   for (size_t i = 0; i < rows; i++) {
     for (size_t j = 0; j < columns; j++) {
-      this->data[i * rows + j] = 0.f;
+      this->data[i * columns + j] = 0.f;
     }
   }
+
 }
 
 Matrix Matrix::dot(const Matrix &other) const {
@@ -23,9 +25,9 @@ Matrix Matrix::dot(const Matrix &other) const {
 }
 
 Matrix Matrix::mul(const Matrix &other) const {
-  int block_size = 32;
+  int block_size = 256;
 
-  if (this->rows() != other.rows() || this->cols() != other.cols()) {
+  if (this->colCount != other.rows()) {
     std::string error_message = "Matrix multiplication: " + this->shape() +
                                 " != " + other.shape() + "!";
     throw std::invalid_argument(error_message);
@@ -82,7 +84,7 @@ float *Matrix::operator[](size_t rows) const {
     throw std::invalid_argument(
         "Matrix indexing: Row indexed is greater than row count!");
   }
-  return reinterpret_cast<float *>(this->data + (this->rowCount * rows));
+  return reinterpret_cast<float *>(this->data + (this->colCount * rows));
 }
 
 Matrix Matrix::operator+(const Matrix &other) const {
@@ -132,7 +134,6 @@ void Matrix::randomise(float start, float end) {
   float total = std::abs(start) + std::abs(end);
 
   size_t data_size = this->rowCount * this->colCount;
-  std::cout << "Data Size: " << data_size << std::endl;
 
   for (size_t i = 0; i < data_size; i++) {
     this->data[i] = start + ((static_cast<float>(rand())/RAND_MAX) * total);

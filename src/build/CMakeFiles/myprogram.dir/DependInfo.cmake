@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/main.cpp" "CMakeFiles/myprogram.dir/main.cpp.o" "gcc" "CMakeFiles/myprogram.dir/main.cpp.o.d"
-  "/home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/matrix.cpp" "CMakeFiles/myprogram.dir/matrix.cpp.o" "gcc" "CMakeFiles/myprogram.dir/matrix.cpp.o.d"
+  "/Users/alisienaghazal/Programming/cpp/TensorMake/src/main.cpp" "CMakeFiles/myprogram.dir/main.cpp.o" "gcc" "CMakeFiles/myprogram.dir/main.cpp.o.d"
+  "/Users/alisienaghazal/Programming/cpp/TensorMake/src/matrix.cpp" "CMakeFiles/myprogram.dir/matrix.cpp.o" "gcc" "CMakeFiles/myprogram.dir/matrix.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -1,3 +1,3 @@
-/home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build/CMakeFiles/myprogram.dir
-/home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build/CMakeFiles/edit_cache.dir
-/home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build/CMakeFiles/rebuild_cache.dir
+/Users/alisienaghazal/Programming/cpp/TensorMake/src/build/CMakeFiles/myprogram.dir
+/Users/alisienaghazal/Programming/cpp/TensorMake/src/build/CMakeFiles/edit_cache.dir
+/Users/alisienaghazal/Programming/cpp/TensorMake/src/build/CMakeFiles/rebuild_cache.dir
