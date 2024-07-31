@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wall -Wextra -O3 CMakeFiles/myprogram.dir/main.cpp.o CMakeFiles/myprogram.dir/matrix.cpp.o -o myprogram
