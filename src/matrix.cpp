@@ -3,11 +3,10 @@
 Matrix::Matrix(size_t rows, size_t columns) {
   this->rowCount = rows;
   this->colCount = columns;
-  //this->data = reinterpret_cast<float*>(malloc(sizeof(float) * rows * columns));
-  this->data = new float[rows * columns];
+  //this->data = new float[rows * columns];
   for (size_t i = 0; i < rows; i++) {
     for (size_t j = 0; j < columns; j++) {
-      this->data[i * columns + j] = 0.f;
+      this->data.push_back(0.f);
     }
   }
 
@@ -24,31 +23,106 @@ Matrix Matrix::dot(const Matrix &other) const {
   return result;
 }
 
-Matrix Matrix::mul(const Matrix &other) const {
-  int block_size = 256;
-
+Matrix Matrix::mul(const Matrix &other, unsigned int block_size) const {
   if (this->colCount != other.rows()) {
     std::string error_message = "Matrix multiplication: " + this->shape() +
                                 " != " + other.shape() + "!";
     throw std::invalid_argument(error_message);
   }
   Matrix result(this->rowCount, other.cols());
-  int n = this->rowCount;
-  int m = this->colCount;
-  int p = other.cols();
+  size_t n = this->rowCount;
+  size_t m = this->colCount;
+  size_t p = other.cols();
 
-  for (int ii = 0; ii < n; ii += block_size) {
-    for (int jj = 0; jj < p; jj += block_size) {
-      for (int kk = 0; kk < m; kk += block_size) {
-        for (int i = ii; i < std::min(ii+block_size, n); i++) {
+  for (size_t ii = 0; ii < n; ii += block_size) {
+    for (size_t jj = 0; jj < p; jj += block_size) {
+      for (size_t kk = 0; kk < m; kk += block_size) {
+        for (size_t i = ii; i < std::min(ii+block_size, n); i++) {
           for (int j = jj; j < std::min(jj+block_size, p); j++) {
+            float sum = 0.f;
             for (int k = kk; k < std::min(kk+block_size, m); k++) {
-              result[i][j] += (*this)[i][k] * other[k][j];
+              sum += (*this)(i, k) * other(k, j);
+            }
+            result(i, j) += sum;
+          }
+        }
+      }
+    }
+  }
+
+  return result;
+}
+
+Matrix Matrix::mul(float x) const {
+  Matrix result(this->rowCount, this->colCount);
+  for(int i = 0; i < this->rowCount * this->colCount; i++){
+    result.getData()[i] = this->data[i] * x;
+  }
+  
+  return result;
+}
+
+Matrix Matrix::parallel_mul(const Matrix &other, size_t thread_count,
+                            unsigned int block_size) const {
+  if (thread_count > 8) {
+    thread_count = 8;
+  }
+  Matrix result(this->rowCount, other.cols());
+
+  std::vector<std::thread> threads;
+
+  auto f = [&](unsigned int start, unsigned int end) {
+    size_t n = end;
+    size_t m = this->colCount;
+    size_t p = other.cols();
+
+    for (size_t ii = start; ii < n; ii += block_size) {
+      for (size_t jj = 0; jj < p; jj += block_size) {
+        for (size_t kk = 0; kk < m; kk += block_size) {
+          for (size_t i = ii; i < std::min(ii + block_size, n); i++) {
+            for (int j = jj; j < std::min(jj + block_size, p); j++) {
+              float sum = 0.f;
+              for (int k = kk; k < std::min(kk + block_size, m); k++) {
+                sum += (*this)(i, k) * other(k, j);
+              }
+              result(i, j) += sum;
             }
           }
         }
       }
     }
+  };
+
+  if (this->rowCount % 2 == 0) {
+    thread_count = 2;
+    if (this->rowCount % 4 == 0) {
+      thread_count = 4;
+      if (this->rowCount % 8 == 0) {
+        thread_count = 8;
+      }
+    }
+  } else if (this->rowCount % 3 == 0) {
+    thread_count = 3;
+    if (this->rowCount % 6 == 0) {
+      thread_count = 6;
+    }
+  } else {
+    thread_count = 1;
+  }
+
+  unsigned int factor = this->rowCount / thread_count;
+
+  unsigned int prev_i = 0;
+
+  for (unsigned int i = 0; i < thread_count; i++) {
+    threads.push_back(std::thread(f, prev_i, (i*factor) + factor));
+
+    prev_i = i;
+  }
+
+  for (int i = 0; i < thread_count; i++) {
+    if(threads[i].joinable())
+      threads[i].join();
   }
 
   return result;
@@ -69,28 +143,55 @@ Matrix Matrix::slow_mul(const Matrix &other) const {
     for (int j = 0; j < p; j++) {
       float sum = 0.f;
       for (int k = 0; k < m; k++) {
-        sum += (*this)[i][k] * other[k][j];
+        sum += (*this)(i, j) * other(k, j);
       }
-      result[i][j] = sum;
+      result(i, j) = sum;
     }
   }
 
   return result;
 }
 
-
-float *Matrix::operator[](size_t rows) const {
-  if (rows >= this->rowCount) {
-    throw std::invalid_argument(
-        "Matrix indexing: Row indexed is greater than row count!");
+const float& Matrix::operator()(size_t row, size_t col) const {
+  if (row > this->rowCount || col > this->colCount) {
+    std::stringstream ss;
+    ss << "Matrix indexing: " << row << " _ " << col << std::endl;
+    throw std::invalid_argument(ss.str());
   }
-  return reinterpret_cast<float *>(this->data + (this->colCount * rows));
+  return this->data[row * this->colCount + col];
+}
+
+float& Matrix::operator()(size_t row, size_t col) {
+  if (row > this->rowCount || col > this->colCount) {
+    std::stringstream ss;
+    ss << "Matrix indexing: " << row << " _ " << col << std::endl;
+    throw std::invalid_argument(ss.str());
+  }
+  return this->data[row * this->colCount + col];
+}
+
+const float* Matrix::operator[](size_t rows) const { //DEPRECATED
+  if (rows > this->rowCount) {
+    std::stringstream ss;
+    ss << "Matrix indexing: " << rows << std::endl;
+    throw std::invalid_argument(ss.str());
+  }
+  return &this->data[rows];
 }
 
 Matrix Matrix::operator+(const Matrix &other) const {
   Matrix result(this->rowCount, this->colCount);
   if (other.rows() != this->rows() || other.cols() != this->cols()) {
-    throw std::invalid_argument("Matrix addition: Dimensions dont match!");
+    if(other.cols() == this->colCount && other.rows() == 1){
+      for (int i = 0; i < this->rowCount; i++) {
+        for (int j = 0; j < this->colCount; j++) {
+          result(i, j) = (*this)(i, j) + other(0, j);
+        }
+      }
+      return result;
+    }
+    std::string error_message = "Matrix addition: " + this->shape() + " != " + other.shape() + "\n";
+    throw std::invalid_argument(error_message);
   } else {
     for (int i = 0; i < this->rowCount * this->colCount; i++) {
       result.getData()[i] = this->data[i] + other.getData()[i];
@@ -115,9 +216,9 @@ Matrix Matrix::operator-(const Matrix &other) const {
 
 Matrix Matrix::transpose() const {
   Matrix result(this->colCount, this->rowCount);
-  for (int i = 0; i < this->colCount; i++) {
-    for (int j = 0; j < this->rowCount; j++) {
-      result[j][i] = (*this)[i][j];
+  for (int i = 0; i < this->rowCount; i++) {
+    for (int j = 0; j < this->colCount; j++) {
+      result(j, i) = (*this)(i, j);
     }
   }
 
@@ -125,7 +226,7 @@ Matrix Matrix::transpose() const {
 }
 
 void Matrix::setValue(size_t row, size_t column, float value) {
-  this->data[row * this->rowCount + column] = value;
+  this->data[row * this->colCount + column] = value;
 }
 
 void Matrix::randomise(float start, float end) {
@@ -145,7 +246,7 @@ const std::string Matrix::format() const {
   for (size_t i = 0; i < this->rowCount; i++) {
     matrixFormat += "(";
     for (size_t j = 0; j < this->colCount; j++) {
-      matrixFormat += std::to_string(this->data[i * rowCount + j]);
+      matrixFormat += std::to_string((*this)(i, j));
       if (j != this->colCount - 1) {
         matrixFormat += ", ";
       }
@@ -167,6 +268,8 @@ size_t Matrix::rows() const { return this->rowCount; }
 
 size_t Matrix::cols() const { return this->colCount; }
 
-float *Matrix::getData() const { return this->data; }
+const std::vector<float>& Matrix::getData() const { return this->data; }
+std::vector<float>& Matrix::getData() { return this->data; }
 
-Matrix::~Matrix() { delete this->data; }
+Matrix::~Matrix() { 
+}

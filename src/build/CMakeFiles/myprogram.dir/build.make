@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/homebrew/Cellar/cmake/3.30.1/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /opt/homebrew/Cellar/cmake/3.30.1/bin/cmake -E rm -f
+RM = /usr/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/alisienaghazal/Programming/cpp/TensorMake/src
+CMAKE_SOURCE_DIR = /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/alisienaghazal/Programming/cpp/TensorMake/src/build
+CMAKE_BINARY_DIR = /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/myprogram.dir/depend.make
@@ -70,32 +70,32 @@ include CMakeFiles/myprogram.dir/progress.make
 include CMakeFiles/myprogram.dir/flags.make
 
 CMakeFiles/myprogram.dir/main.cpp.o: CMakeFiles/myprogram.dir/flags.make
-CMakeFiles/myprogram.dir/main.cpp.o: /Users/alisienaghazal/Programming/cpp/TensorMake/src/main.cpp
+CMakeFiles/myprogram.dir/main.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/main.cpp
 CMakeFiles/myprogram.dir/main.cpp.o: CMakeFiles/myprogram.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alisienaghazal/Programming/cpp/TensorMake/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/myprogram.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myprogram.dir/main.cpp.o -MF CMakeFiles/myprogram.dir/main.cpp.o.d -o CMakeFiles/myprogram.dir/main.cpp.o -c /Users/alisienaghazal/Programming/cpp/TensorMake/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/myprogram.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myprogram.dir/main.cpp.o -MF CMakeFiles/myprogram.dir/main.cpp.o.d -o CMakeFiles/myprogram.dir/main.cpp.o -c /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/main.cpp
 
 CMakeFiles/myprogram.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/myprogram.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alisienaghazal/Programming/cpp/TensorMake/src/main.cpp > CMakeFiles/myprogram.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/main.cpp > CMakeFiles/myprogram.dir/main.cpp.i
 
 CMakeFiles/myprogram.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/myprogram.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alisienaghazal/Programming/cpp/TensorMake/src/main.cpp -o CMakeFiles/myprogram.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/main.cpp -o CMakeFiles/myprogram.dir/main.cpp.s
 
 CMakeFiles/myprogram.dir/matrix.cpp.o: CMakeFiles/myprogram.dir/flags.make
-CMakeFiles/myprogram.dir/matrix.cpp.o: /Users/alisienaghazal/Programming/cpp/TensorMake/src/matrix.cpp
+CMakeFiles/myprogram.dir/matrix.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/matrix.cpp
 CMakeFiles/myprogram.dir/matrix.cpp.o: CMakeFiles/myprogram.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alisienaghazal/Programming/cpp/TensorMake/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/myprogram.dir/matrix.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myprogram.dir/matrix.cpp.o -MF CMakeFiles/myprogram.dir/matrix.cpp.o.d -o CMakeFiles/myprogram.dir/matrix.cpp.o -c /Users/alisienaghazal/Programming/cpp/TensorMake/src/matrix.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/myprogram.dir/matrix.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myprogram.dir/matrix.cpp.o -MF CMakeFiles/myprogram.dir/matrix.cpp.o.d -o CMakeFiles/myprogram.dir/matrix.cpp.o -c /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/matrix.cpp
 
 CMakeFiles/myprogram.dir/matrix.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/myprogram.dir/matrix.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alisienaghazal/Programming/cpp/TensorMake/src/matrix.cpp > CMakeFiles/myprogram.dir/matrix.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/matrix.cpp > CMakeFiles/myprogram.dir/matrix.cpp.i
 
 CMakeFiles/myprogram.dir/matrix.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/myprogram.dir/matrix.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alisienaghazal/Programming/cpp/TensorMake/src/matrix.cpp -o CMakeFiles/myprogram.dir/matrix.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/matrix.cpp -o CMakeFiles/myprogram.dir/matrix.cpp.s
 
 # Object files for target myprogram
 myprogram_OBJECTS = \
@@ -109,7 +109,7 @@ myprogram: CMakeFiles/myprogram.dir/main.cpp.o
 myprogram: CMakeFiles/myprogram.dir/matrix.cpp.o
 myprogram: CMakeFiles/myprogram.dir/build.make
 myprogram: CMakeFiles/myprogram.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/alisienaghazal/Programming/cpp/TensorMake/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable myprogram"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable myprogram"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/myprogram.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +121,6 @@ CMakeFiles/myprogram.dir/clean:
 .PHONY : CMakeFiles/myprogram.dir/clean
 
 CMakeFiles/myprogram.dir/depend:
-	cd /Users/alisienaghazal/Programming/cpp/TensorMake/src/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/alisienaghazal/Programming/cpp/TensorMake/src /Users/alisienaghazal/Programming/cpp/TensorMake/src /Users/alisienaghazal/Programming/cpp/TensorMake/src/build /Users/alisienaghazal/Programming/cpp/TensorMake/src/build /Users/alisienaghazal/Programming/cpp/TensorMake/src/build/CMakeFiles/myprogram.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build/CMakeFiles/myprogram.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/myprogram.dir/depend
 
