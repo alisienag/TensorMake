@@ -216,4 +216,23 @@ CMakeFiles/myprogram.dir/main.cpp.o: \
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/opt_random.h \
  /usr/include/c++/14.1.1/bits/random.tcc /usr/include/c++/14.1.1/numeric \
  /usr/include/c++/14.1.1/bits/stl_numeric.h \
- /usr/include/c++/14.1.1/pstl/glue_numeric_defs.h
+ /usr/include/c++/14.1.1/pstl/glue_numeric_defs.h \
+ /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/./data/mnist.hpp \
+ /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/./data/../mnist/mnist_reader.hpp \
+ /usr/include/c++/14.1.1/fstream /usr/include/c++/14.1.1/bits/codecvt.h \
+ /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/c++io.h \
+ /usr/include/c++/14.1.1/bits/fstream.tcc /usr/include/c++/14.1.1/memory \
+ /usr/include/c++/14.1.1/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/14.1.1/bits/align.h \
+ /usr/include/c++/14.1.1/bits/shared_ptr.h \
+ /usr/include/c++/14.1.1/bits/shared_ptr_base.h \
+ /usr/include/c++/14.1.1/bits/allocated_ptr.h \
+ /usr/include/c++/14.1.1/ext/aligned_buffer.h \
+ /usr/include/c++/14.1.1/ext/concurrence.h \
+ /usr/include/c++/14.1.1/bits/shared_ptr_atomic.h \
+ /usr/include/c++/14.1.1/backward/auto_ptr.h \
+ /usr/include/c++/14.1.1/bits/ranges_uninitialized.h \
+ /usr/include/c++/14.1.1/pstl/glue_memory_defs.h \
+ /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/./data/../mnist/mnist_reader_common.hpp \
+ /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/./data/../mnist/mnist_utils.hpp

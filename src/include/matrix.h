@@ -17,6 +17,9 @@
 class Matrix {
 public:
   Matrix(size_t, size_t);
+  Matrix(std::vector<std::vector<uint8_t>>);
+  Matrix(std::vector<float>);
+  Matrix(std::vector<uint8_t>);
 
   void setValue(size_t row, size_t column, float value);
   Matrix dot(const Matrix&) const;
@@ -27,7 +30,15 @@ public:
   Matrix operator+(const Matrix&) const;
   Matrix operator-(const Matrix&) const;
 
+  Matrix trim(size_t, size_t) const;
+  Matrix sumCols() const;
+
+
+  const Matrix one_hot_encode() const;
+  const Matrix argmax() const;
+
   const float &operator()(size_t row, size_t col) const;
+  const bool operator==(const Matrix& other) const;
   float &operator()(size_t row, size_t col);
 
   // deprecated

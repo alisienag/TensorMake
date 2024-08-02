@@ -9,7 +9,26 @@ Matrix::Matrix(size_t rows, size_t columns) {
       this->data.push_back(0.f);
     }
   }
+}
 
+Matrix::Matrix(std::vector<std::vector<uint8_t>> data){
+  this->rowCount = data.size();
+  this->colCount = data[0].size();
+
+  for(int i = 0; i < rowCount; i++){
+    for(int j = 0; j < colCount; j++){
+      this->data.push_back(static_cast<float>(static_cast<float>(data[i][j]) / 255.f));
+    }
+  }
+}
+
+Matrix::Matrix(std::vector<uint8_t> data){
+  this->rowCount = 1;
+  this->colCount = data.size();
+  //this->data = new float[rows * columns];
+  for (size_t i = 0; i < this->colCount; i++) {
+    this->data.push_back(static_cast<float>(static_cast<float>(data.at(i))));
+  }
 }
 
 Matrix Matrix::dot(const Matrix &other) const {
@@ -64,8 +83,8 @@ Matrix Matrix::mul(float x) const {
 
 Matrix Matrix::parallel_mul(const Matrix &other, size_t thread_count,
                             unsigned int block_size) const {
-  if (thread_count > 8) {
-    thread_count = 8;
+  if (thread_count > 16) {
+    thread_count = 16;
   }
   Matrix result(this->rowCount, other.cols());
 
@@ -92,13 +111,15 @@ Matrix Matrix::parallel_mul(const Matrix &other, size_t thread_count,
       }
     }
   };
-
   if (this->rowCount % 2 == 0) {
     thread_count = 2;
     if (this->rowCount % 4 == 0) {
       thread_count = 4;
       if (this->rowCount % 8 == 0) {
         thread_count = 8;
+        if(this->rowCount % 16 == 0){
+          thread_count = 16;
+        }
       }
     }
   } else if (this->rowCount % 3 == 0) {
@@ -203,14 +224,95 @@ Matrix Matrix::operator+(const Matrix &other) const {
 
 Matrix Matrix::operator-(const Matrix &other) const {
   Matrix result(this->rowCount, this->colCount);
-  if (other.rows() != this->rows() || other.cols() != this->cols()) {
-    throw std::invalid_argument("Matrix subtraction: Dimensions dont match!");
+  if (other.rows() != this->rows() || other.cols() != this->cols()) {\
+    std::string error_message = "Matix subtraction: " + this->shape() + " != " + other.shape() + "!\n";
+    throw std::invalid_argument(error_message);
   } else {
     for (int i = 0; i < this->rowCount * this->colCount; i++) {
       result.getData()[i] = this->data[i] - other.getData()[i];
     }
   }
 
+  return result;
+}
+
+const bool Matrix::operator==(const Matrix& other) const {
+  if(this->rowCount != other.rowCount || this->colCount != other.colCount){
+    return false;
+  }
+
+  bool result = true;
+
+  for(int i = 0; i < this->rowCount; i++){
+    for(int j = 0; j < this->colCount; j++){
+      if((*this)(i,j) != other(i, j)){
+        result = false;
+      }
+    }
+  }
+
+  return result;
+}
+
+Matrix Matrix::trim(size_t start, size_t end) const {
+  if(start == end){
+    throw std::invalid_argument("Can't trim matrix, start and end equal!");
+  }
+  if(start >= this->rowCount || end >= this->rowCount){
+    throw std::invalid_argument("Start or end is larger than matrix row count!");
+  }
+  Matrix result(end - start, this->colCount);
+  
+  for(int i = start; i < end; i++){
+    for(int j = 0; j < this->colCount; j++){
+      result(i - start, j) = (*this)(i, j);
+    }  
+  }
+
+  return result;
+
+}
+
+Matrix Matrix::sumCols() const {
+  Matrix result(1, this->colCount);
+
+  for (int i = 0; i < this->colCount; i++) {
+    float sum = 0.f;
+    for (int j = 0; j < this->rowCount; j++) {
+      sum += (*this)(j, i);
+    }
+    result(0, i) = sum;
+  }
+
+  return result;
+}
+
+const Matrix Matrix::one_hot_encode() const {
+  if(this->colCount != 1){
+    throw std::invalid_argument("One Hot Encoding: No. of columns is " + std::to_string(this->colCount) + "!\n" );
+  }
+  Matrix result(this->rowCount, 10);
+  for (int i = 0; i < this->rowCount; i++) {
+    int idx = static_cast<int>((*this)(i, 0));
+    result(i,idx) = 1.f;
+  }
+  return result;
+}
+
+const Matrix Matrix::argmax() const {
+  Matrix result(this->rowCount, this->colCount);
+
+  for (int i = 0; i < this->rowCount; i++) {
+    float max = -999999.f;
+    int idx = -9;
+    for (int j = 0; j < this->colCount; j++) {
+      if((*this)(i,j) > max){
+        max = (*this)(i,j);
+        idx = j;
+      }
+    }
+    result(i,idx) = 1.f;
+  }
   return result;
 }
 
