@@ -83,9 +83,6 @@ Matrix Matrix::mul(float x) const {
 
 Matrix Matrix::parallel_mul(const Matrix &other, size_t thread_count,
                             unsigned int block_size) const {
-  if (thread_count > 16) {
-    thread_count = 16;
-  }
   Matrix result(this->rowCount, other.cols());
 
   std::vector<std::thread> threads;
@@ -117,8 +114,14 @@ Matrix Matrix::parallel_mul(const Matrix &other, size_t thread_count,
       thread_count = 4;
       if (this->rowCount % 8 == 0) {
         thread_count = 8;
-        if(this->rowCount % 16 == 0){
+        if(this->rowCount % 16 == 0) {
           thread_count = 16;
+          if(this->rowCount % 32 == 0) {
+            thread_count = 32;
+          }
+          if(this->rowCount % 64 == 0) {
+            thread_count = 64;
+          }
         }
       }
     }

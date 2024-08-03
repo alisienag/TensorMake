@@ -2,6 +2,7 @@
 #include "./data/mnist.hpp"
 
 #include <time.h>
+#include <algorithm>
 
 #define TEST_TIME(x) start = clock(); x; end = clock(); std::cout << std::cout << (double)(end - start) / CLOCKS_PER_SEC << std::endl;
 #define INDEX_HIDDEN_FIRST 0
@@ -36,6 +37,22 @@ Matrix feed(Matrix& input, std::vector<Matrix>& weights, std::vector<Matrix>& bi
   return result;
 }
 
+double crossEntropyLoss(const std::vector<float>& predicted, const std::vector<float>& labels) {
+
+    double loss = 0.0;
+    for (size_t i = 0; i < predicted.size(); ++i) {
+        // Ensure probabilities are clipped to avoid log(0)
+        double prob = std::max(std::min(predicted[i], static_cast<float>(1.0 - 1e-15)), static_cast<float>(1e-15));
+        if (labels[i] == 1) {
+            loss -= std::log(prob);
+        } else {
+            loss -= std::log(1.0 - prob);
+        }
+    }
+
+    return loss / predicted.size();
+}
+
 Matrix update_params(const Matrix &input, const Matrix &predicted, const Matrix &result,
                      std::vector<Matrix> &weights, std::vector<Matrix> &bias,
                      std::vector<Matrix> &neurons, const float learning_rate) {
@@ -47,22 +64,24 @@ Matrix update_params(const Matrix &input, const Matrix &predicted, const Matrix 
     d_loss_output =
         (result - predicted).dot(d_sigmoid(neurons[INDEX_OUTPUT])); // 60000x10
   }
-  // d_loss_output = (result - predicted).dot(d_sigmoid(neurons[INDEX_OUTPUT]));
+
+  //std::cout << "Loss: " << crossEntropyLoss(predicted.getData(), result.getData()) << std::endl;
+    // d_loss_output = (result - predicted).dot(d_sigmoid(neurons[INDEX_OUTPUT]));
   // //60000x10
   Matrix d_loss_second =
-      d_loss_output.parallel_mul(weights[2].transpose(), 16, 64)
+      d_loss_output.parallel_mul(weights[2].transpose(), 16, 16)
           .dot(d_reLU(neurons[INDEX_HIDDEN_SECOND]));
   Matrix d_loss_first =
-      d_loss_second.parallel_mul(weights[1].transpose(), 16, 32)
+      d_loss_second.parallel_mul(weights[1].transpose(), 16, 16)
           .dot(d_reLU(neurons[INDEX_HIDDEN_FIRST]));
 
   Matrix d_loss_weights2 = neurons[INDEX_HIDDEN_SECOND + INDEX_ACTIVATED_OFFSET]
                                .transpose()
-                               .parallel_mul(d_loss_output, 16, 32);
+                               .parallel_mul(d_loss_output, 16, 16);
   Matrix d_loss_weights1 = neurons[INDEX_HIDDEN_FIRST + INDEX_ACTIVATED_OFFSET]
                                .transpose()
-                               .parallel_mul(d_loss_second, 16, 32);
-  Matrix d_loss_weights0 = input.transpose().parallel_mul(d_loss_first, 16, 32);
+                               .parallel_mul(d_loss_second, 16, 16);
+  Matrix d_loss_weights0 = input.transpose().parallel_mul(d_loss_first, 16, 16);
 
   weights[0] = weights[0] - d_loss_weights0.mul(learning_rate);
   weights[1] = weights[1] - d_loss_weights1.mul(learning_rate);
@@ -105,13 +124,13 @@ int main() {
   mnist_training_labels = mnist_training_labels.transpose().one_hot_encode();
   mnist_testing_labels = mnist_testing_labels.transpose().one_hot_encode();
 
-  Matrix weight_1(784, 64); weight_1.randomise(-0.5f, 0.5f);
-  Matrix weight_2(64, 32); weight_2.randomise(-0.5f, 0.5f);
-  Matrix weight_3(32, 10); weight_3.randomise(-0.5f, 0.5f);
+  Matrix weight_1(784, 32); weight_1.randomise(-0.5f, 0.5f);
+  Matrix weight_2(32, 16); weight_2.randomise(-0.5f, 0.5f);
+  Matrix weight_3(16, 10); weight_3.randomise(-0.5f, 0.5f);
   std::vector<Matrix> weights; weights.push_back(weight_1); weights.push_back(weight_2); weights.push_back(weight_3);
 
-  Matrix bias_1(1, 64); bias_1.randomise(-0.5f, 0.5f);
-  Matrix bias_2(1, 32); bias_2.randomise(-0.5f, 0.5);
+  Matrix bias_1(1, 32); bias_1.randomise(-0.5f, 0.5f);
+  Matrix bias_2(1, 16); bias_2.randomise(-0.5f, 0.5);
   Matrix bias_3(1, 10); bias_3.randomise(-0.5f, 0.5f);
 
   std::vector<Matrix> bias = { bias_1, bias_2, bias_3 };
@@ -119,14 +138,17 @@ int main() {
                                  Matrix(1, 1), Matrix(1, 1), Matrix(1, 1)};
   Matrix trim = mnist_testing_input.trim(0,1);
   Matrix res = feed(trim, weights, bias, results);
-  print_matrix(res);
-  print_matrix(mnist_testing_labels.trim(0, 1));
   float learning_rate = 0.00001f;
-  for(int i = 0; i < 5; i++){
-    std::cout << i <<" accuracy: " << accuracy(feed(mnist_testing_input, weights, bias, results).argmax(), mnist_testing_labels) << std::endl;
+  for(int i = 0; i < 50; i++){
     Matrix res = feed(mnist_training_input, weights, bias, results);
     update_params(mnist_training_input, mnist_training_labels, res, weights, bias, results, learning_rate);
   }
+  print_matrix(res);
+  print_matrix(mnist_testing_labels.trim(0, 1));
+  res = feed(trim, weights, bias, results);
+  print_matrix(res);
+  print_matrix(mnist_testing_labels.trim(0, 1));
+
   for(int i = 0; i < mnist_testing_input.rows(); i++){
     trim = mnist_testing_input.trim(i, i+1);
     Matrix trim_act = mnist_testing_labels.trim(i, i+1);
