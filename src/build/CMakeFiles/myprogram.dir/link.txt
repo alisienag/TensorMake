@@ -1,1 +1,1 @@
-/usr/bin/c++ -Wall -Wextra -O3 CMakeFiles/myprogram.dir/main.cpp.o CMakeFiles/myprogram.dir/matrix.cpp.o -o myprogram
+/usr/bin/c++ -Wall -Wextra -O3 CMakeFiles/myprogram.dir/layer.cpp.o CMakeFiles/myprogram.dir/main.cpp.o CMakeFiles/myprogram.dir/matrix.cpp.o CMakeFiles/myprogram.dir/neural_network.cpp.o -o myprogram

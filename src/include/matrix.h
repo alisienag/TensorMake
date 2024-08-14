@@ -15,11 +15,12 @@
 #define print_shape(x) std::cout << x.shape() << std::endl
 
 class Matrix {
-public:
+ public:
+  Matrix();
   Matrix(size_t, size_t);
-  Matrix(std::vector<std::vector<uint8_t>>);
-  Matrix(std::vector<float>);
-  Matrix(std::vector<uint8_t>);
+  explicit Matrix(std::vector<std::vector<uint8_t>>);
+  explicit Matrix(std::vector<float>);
+  explicit Matrix(std::vector<uint8_t>);
 
   void setValue(size_t row, size_t column, float value);
   Matrix dot(const Matrix&) const;
@@ -29,10 +30,11 @@ public:
   Matrix slow_mul(const Matrix&) const;
   Matrix operator+(const Matrix&) const;
   Matrix operator-(const Matrix&) const;
+  Matrix operator/(const float&) const;
 
   Matrix trim(size_t, size_t) const;
+    float sum() const;
   Matrix sumCols() const;
-
 
   const Matrix one_hot_encode() const;
   const Matrix argmax() const;
@@ -59,9 +61,8 @@ public:
 
   ~Matrix();
 
-private:
+ private:
   std::vector<float> data;
-  //float *data;
   size_t rowCount;
   size_t colCount;
 };

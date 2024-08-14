@@ -1,5 +1,5 @@
-CMakeFiles/myprogram.dir/main.cpp.o: \
- /home/Alisiena/Programming/cpp/TensorMake/src/main.cpp \
+CMakeFiles/myprogram.dir/neural_network.cpp.o: \
+ /home/Alisiena/Programming/cpp/TensorMake/src/neural_network.cpp \
  /usr/include/stdc-predef.h \
  /home/Alisiena/Programming/cpp/TensorMake/src/./include/neural_network.h \
  /home/Alisiena/Programming/cpp/TensorMake/src/./include/./layer.h \

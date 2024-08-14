@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src
+CMAKE_SOURCE_DIR = /home/Alisiena/Programming/cpp/TensorMake/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build
+CMAKE_BINARY_DIR = /home/Alisiena/Programming/cpp/TensorMake/src/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build/CMakeFiles /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Alisiena/Programming/cpp/TensorMake/src/build/CMakeFiles /home/Alisiena/Programming/cpp/TensorMake/src/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/Alisiena/Programming/cpp/TensorMake/TensorMake/src/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/Alisiena/Programming/cpp/TensorMake/src/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -128,6 +128,30 @@ myprogram: cmake_check_build_system
 myprogram/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/myprogram.dir/build.make CMakeFiles/myprogram.dir/build
 .PHONY : myprogram/fast
+
+layer.o: layer.cpp.o
+.PHONY : layer.o
+
+# target to build an object file
+layer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myprogram.dir/build.make CMakeFiles/myprogram.dir/layer.cpp.o
+.PHONY : layer.cpp.o
+
+layer.i: layer.cpp.i
+.PHONY : layer.i
+
+# target to preprocess a source file
+layer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myprogram.dir/build.make CMakeFiles/myprogram.dir/layer.cpp.i
+.PHONY : layer.cpp.i
+
+layer.s: layer.cpp.s
+.PHONY : layer.s
+
+# target to generate assembly for a file
+layer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myprogram.dir/build.make CMakeFiles/myprogram.dir/layer.cpp.s
+.PHONY : layer.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -177,6 +201,30 @@ matrix.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/myprogram.dir/build.make CMakeFiles/myprogram.dir/matrix.cpp.s
 .PHONY : matrix.cpp.s
 
+neural_network.o: neural_network.cpp.o
+.PHONY : neural_network.o
+
+# target to build an object file
+neural_network.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myprogram.dir/build.make CMakeFiles/myprogram.dir/neural_network.cpp.o
+.PHONY : neural_network.cpp.o
+
+neural_network.i: neural_network.cpp.i
+.PHONY : neural_network.i
+
+# target to preprocess a source file
+neural_network.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myprogram.dir/build.make CMakeFiles/myprogram.dir/neural_network.cpp.i
+.PHONY : neural_network.cpp.i
+
+neural_network.s: neural_network.cpp.s
+.PHONY : neural_network.s
+
+# target to generate assembly for a file
+neural_network.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/myprogram.dir/build.make CMakeFiles/myprogram.dir/neural_network.cpp.s
+.PHONY : neural_network.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +234,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... myprogram"
+	@echo "... layer.o"
+	@echo "... layer.i"
+	@echo "... layer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
 	@echo "... matrix.o"
 	@echo "... matrix.i"
 	@echo "... matrix.s"
+	@echo "... neural_network.o"
+	@echo "... neural_network.i"
+	@echo "... neural_network.s"
 .PHONY : help
 
 
