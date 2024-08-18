@@ -300,6 +300,10 @@ CMakeFiles/myprogram.dir/layer.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/
 
 CMakeFiles/myprogram.dir/main.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/src/main.cpp \
   /home/Alisiena/Programming/cpp/TensorMake/src/include/matrix.h \
+  /home/Alisiena/Programming/cpp/TensorMake/src/mnist/mnist_reader.hpp \
+  /home/Alisiena/Programming/cpp/TensorMake/src/mnist/mnist_reader_common.hpp \
+  /home/Alisiena/Programming/cpp/TensorMake/src/mnist/mnist_utils.hpp \
+  /home/Alisiena/Programming/cpp/TensorMake/src/data/mnist.hpp \
   /home/Alisiena/Programming/cpp/TensorMake/src/include/layer.h \
   /home/Alisiena/Programming/cpp/TensorMake/src/include/neural_network.h \
   /usr/include/alloca.h \
@@ -395,10 +399,13 @@ CMakeFiles/myprogram.dir/main.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/s
   /usr/include/bits/xopen_lim.h \
   /usr/include/c++/14.2.1/algorithm \
   /usr/include/c++/14.2.1/atomic \
+  /usr/include/c++/14.2.1/backward/auto_ptr.h \
   /usr/include/c++/14.2.1/backward/binders.h \
   /usr/include/c++/14.2.1/bit \
   /usr/include/c++/14.2.1/bits/algorithmfwd.h \
+  /usr/include/c++/14.2.1/bits/align.h \
   /usr/include/c++/14.2.1/bits/alloc_traits.h \
+  /usr/include/c++/14.2.1/bits/allocated_ptr.h \
   /usr/include/c++/14.2.1/bits/allocator.h \
   /usr/include/c++/14.2.1/bits/atomic_base.h \
   /usr/include/c++/14.2.1/bits/atomic_lockfree_defines.h \
@@ -411,6 +418,7 @@ CMakeFiles/myprogram.dir/main.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/s
   /usr/include/c++/14.2.1/bits/char_traits.h \
   /usr/include/c++/14.2.1/bits/charconv.h \
   /usr/include/c++/14.2.1/bits/chrono.h \
+  /usr/include/c++/14.2.1/bits/codecvt.h \
   /usr/include/c++/14.2.1/bits/concept_check.h \
   /usr/include/c++/14.2.1/bits/cpp_type_traits.h \
   /usr/include/c++/14.2.1/bits/cxxabi_forced.h \
@@ -418,6 +426,7 @@ CMakeFiles/myprogram.dir/main.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/s
   /usr/include/c++/14.2.1/bits/exception.h \
   /usr/include/c++/14.2.1/bits/exception_defines.h \
   /usr/include/c++/14.2.1/bits/exception_ptr.h \
+  /usr/include/c++/14.2.1/bits/fstream.tcc \
   /usr/include/c++/14.2.1/bits/functexcept.h \
   /usr/include/c++/14.2.1/bits/functional_hash.h \
   /usr/include/c++/14.2.1/bits/hash_bytes.h \
@@ -449,10 +458,14 @@ CMakeFiles/myprogram.dir/main.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/s
   /usr/include/c++/14.2.1/bits/ranges_algobase.h \
   /usr/include/c++/14.2.1/bits/ranges_base.h \
   /usr/include/c++/14.2.1/bits/ranges_cmp.h \
+  /usr/include/c++/14.2.1/bits/ranges_uninitialized.h \
   /usr/include/c++/14.2.1/bits/ranges_util.h \
   /usr/include/c++/14.2.1/bits/refwrap.h \
   /usr/include/c++/14.2.1/bits/requires_hosted.h \
   /usr/include/c++/14.2.1/bits/semaphore_base.h \
+  /usr/include/c++/14.2.1/bits/shared_ptr.h \
+  /usr/include/c++/14.2.1/bits/shared_ptr_atomic.h \
+  /usr/include/c++/14.2.1/bits/shared_ptr_base.h \
   /usr/include/c++/14.2.1/bits/specfun.h \
   /usr/include/c++/14.2.1/bits/sstream.tcc \
   /usr/include/c++/14.2.1/bits/std_abs.h \
@@ -469,6 +482,7 @@ CMakeFiles/myprogram.dir/main.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/s
   /usr/include/c++/14.2.1/bits/stl_iterator_base_types.h \
   /usr/include/c++/14.2.1/bits/stl_numeric.h \
   /usr/include/c++/14.2.1/bits/stl_pair.h \
+  /usr/include/c++/14.2.1/bits/stl_raw_storage_iter.h \
   /usr/include/c++/14.2.1/bits/stl_tempbuf.h \
   /usr/include/c++/14.2.1/bits/stl_uninitialized.h \
   /usr/include/c++/14.2.1/bits/stl_vector.h \
@@ -501,23 +515,28 @@ CMakeFiles/myprogram.dir/main.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/s
   /usr/include/c++/14.2.1/debug/assertions.h \
   /usr/include/c++/14.2.1/debug/debug.h \
   /usr/include/c++/14.2.1/exception \
+  /usr/include/c++/14.2.1/ext/aligned_buffer.h \
   /usr/include/c++/14.2.1/ext/alloc_traits.h \
   /usr/include/c++/14.2.1/ext/atomicity.h \
+  /usr/include/c++/14.2.1/ext/concurrence.h \
   /usr/include/c++/14.2.1/ext/numeric_traits.h \
   /usr/include/c++/14.2.1/ext/string_conversions.h \
   /usr/include/c++/14.2.1/ext/type_traits.h \
+  /usr/include/c++/14.2.1/fstream \
   /usr/include/c++/14.2.1/initializer_list \
   /usr/include/c++/14.2.1/ios \
   /usr/include/c++/14.2.1/iosfwd \
   /usr/include/c++/14.2.1/iostream \
   /usr/include/c++/14.2.1/istream \
   /usr/include/c++/14.2.1/limits \
+  /usr/include/c++/14.2.1/memory \
   /usr/include/c++/14.2.1/new \
   /usr/include/c++/14.2.1/numbers \
   /usr/include/c++/14.2.1/numeric \
   /usr/include/c++/14.2.1/ostream \
   /usr/include/c++/14.2.1/pstl/execution_defs.h \
   /usr/include/c++/14.2.1/pstl/glue_algorithm_defs.h \
+  /usr/include/c++/14.2.1/pstl/glue_memory_defs.h \
   /usr/include/c++/14.2.1/pstl/glue_numeric_defs.h \
   /usr/include/c++/14.2.1/pstl/pstl_config.h \
   /usr/include/c++/14.2.1/random \
@@ -548,8 +567,10 @@ CMakeFiles/myprogram.dir/main.cpp.o: /home/Alisiena/Programming/cpp/TensorMake/s
   /usr/include/c++/14.2.1/typeinfo \
   /usr/include/c++/14.2.1/vector \
   /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
+  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
   /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
   /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
+  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
   /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++locale.h \
   /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
   /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/ctype_base.h \
@@ -1209,11 +1230,39 @@ CMakeFiles/myprogram.dir/neural_network.cpp.o: /home/Alisiena/Programming/cpp/Te
 
 /usr/include/c++/14.2.1/bits/locale_conv.h:
 
-/usr/include/c++/14.2.1/bits/codecvt.h:
+/usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++io.h:
+
+/usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/basic_file.h:
+
+/usr/include/c++/14.2.1/pstl/glue_memory_defs.h:
+
+/usr/include/c++/14.2.1/memory:
+
+/usr/include/c++/14.2.1/fstream:
+
+/usr/include/c++/14.2.1/ext/concurrence.h:
 
 /home/Alisiena/Programming/cpp/TensorMake/src/matrix.cpp:
 
+/usr/include/c++/14.2.1/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/14.2.1/bits/shared_ptr_base.h:
+
+/usr/include/c++/14.2.1/bits/shared_ptr_atomic.h:
+
+/usr/include/c++/14.2.1/bits/ranges_uninitialized.h:
+
+/usr/include/c++/14.2.1/bits/codecvt.h:
+
+/usr/include/c++/14.2.1/bits/align.h:
+
 /home/Alisiena/Programming/cpp/TensorMake/src/include/neural_network.h:
+
+/home/Alisiena/Programming/cpp/TensorMake/src/mnist/mnist_utils.hpp:
+
+/home/Alisiena/Programming/cpp/TensorMake/src/mnist/mnist_reader_common.hpp:
+
+/home/Alisiena/Programming/cpp/TensorMake/src/mnist/mnist_reader.hpp:
 
 /home/Alisiena/Programming/cpp/TensorMake/src/main.cpp:
 
@@ -1236,6 +1285,8 @@ CMakeFiles/myprogram.dir/neural_network.cpp.o: /home/Alisiena/Programming/cpp/Te
 /usr/include/semaphore.h:
 
 /usr/include/linux/limits.h:
+
+/usr/include/c++/14.2.1/bits/allocated_ptr.h:
 
 /usr/include/linux/errno.h:
 
@@ -1367,6 +1418,8 @@ CMakeFiles/myprogram.dir/neural_network.cpp.o: /home/Alisiena/Programming/cpp/Te
 
 /usr/include/bits/posix_opt.h:
 
+/usr/include/c++/14.2.1/ext/aligned_buffer.h:
+
 /usr/include/bits/libc-header-start.h:
 
 /usr/include/bits/iscanonical.h:
@@ -1462,6 +1515,8 @@ CMakeFiles/myprogram.dir/neural_network.cpp.o: /home/Alisiena/Programming/cpp/Te
 /usr/include/bits/pthreadtypes.h:
 
 /usr/include/c++/14.2.1/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/14.2.1/bits/shared_ptr.h:
 
 /usr/include/c++/14.2.1/tr1/bessel_function.tcc:
 
@@ -1669,6 +1724,8 @@ CMakeFiles/myprogram.dir/neural_network.cpp.o: /home/Alisiena/Programming/cpp/Te
 
 /usr/include/c++/14.2.1/bits/stl_heap.h:
 
+/home/Alisiena/Programming/cpp/TensorMake/src/data/mnist.hpp:
+
 /usr/include/c++/14.2.1/bits/stl_algobase.h:
 
 /usr/include/c++/14.2.1/cstdlib:
@@ -1715,6 +1772,8 @@ CMakeFiles/myprogram.dir/neural_network.cpp.o: /home/Alisiena/Programming/cpp/Te
 
 /usr/include/c++/14.2.1/istream:
 
+/usr/include/c++/14.2.1/bits/fstream.tcc:
+
 /usr/include/c++/14.2.1/tr1/hypergeometric.tcc:
 
 /usr/include/wchar.h:
@@ -1758,6 +1817,8 @@ CMakeFiles/myprogram.dir/neural_network.cpp.o: /home/Alisiena/Programming/cpp/Te
 /usr/include/c++/14.2.1/bits/atomic_timed_wait.h:
 
 /usr/include/c++/14.2.1/pstl/execution_defs.h:
+
+/usr/include/c++/14.2.1/backward/auto_ptr.h:
 
 /usr/include/c++/14.2.1/pstl/glue_numeric_defs.h:
 

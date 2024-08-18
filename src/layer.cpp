@@ -3,9 +3,8 @@
 
 Layer::Layer(size_t inputs, size_t outputs, size_t activation_id) {
     this->weights = Matrix(inputs, outputs);
-    this->weights.randomise(-0.5f, 0.5f);
+    this->weights.randomise(-0.3f, 0.3f);
     this->bias = Matrix(1, outputs);
-    this->bias.randomise(-0.5f, 0.5f);
 
     this->activation_id = activation_id;
 }
@@ -59,27 +58,19 @@ Matrix& Layer::getBias() {
 
 Matrix Layer::softmax(const Matrix& input) const {
     Matrix result(input.rows(), input.cols());
-    std::vector<float> max_row;
-    std::vector<float> sum_row;
+    
+    std::vector<float> sum_of_rows;
 
-    for (int i = 0; i < input.rows(); i++) {
-        sum_row.push_back(0.f);
-        float max = -9999999.f;
-        for (int j = 0; j < input.cols(); j++) {
-            sum_row[i] += std::exp(input(i, j));
-            if (max <= input(i, j)) {
-                max = input(i, j);
-            }
-        }
-        max_row.push_back(max);
-    }
+    for (size_t i = 0; i < input.rows(); i++) {
+      float sum = 0.f;
+      for (size_t j = 0; j < input.cols(); j++) {
+        sum += std::exp(input(i, j));
+      }
+      sum_of_rows.push_back(sum);
 
-    for (int i = 0; i < input.rows(); i++) {
-        for (int j = 0; j < input.cols(); j++) {
-            std::cout << input(i, j) << std::endl;
-            std::cout << max_row[i] << std::endl;
-            result(i, j) = std::exp(input(i, j) - max_row[i]) / sum_row[i];
-         }
+      for (size_t j = 0; j < input.cols(); j++) {
+        result(i, j) = std::exp(input(i, j)) / sum_of_rows[i];
+      }
     }
     return result;
 }
@@ -120,4 +111,7 @@ Matrix Layer::d_sigmoid(const Matrix &input) const {
     result.getData()[i] = exp * (1.f - exp);
   }
   return result;
+}
+int Layer::getActivationID() {
+  return this->activation_id;
 }

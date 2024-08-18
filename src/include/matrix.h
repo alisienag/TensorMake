@@ -18,7 +18,7 @@ class Matrix {
  public:
   Matrix();
   Matrix(size_t, size_t);
-  explicit Matrix(std::vector<std::vector<uint8_t>>);
+  explicit Matrix(std::vector<std::vector<uint8_t>>, bool);
   explicit Matrix(std::vector<float>);
   explicit Matrix(std::vector<uint8_t>);
 

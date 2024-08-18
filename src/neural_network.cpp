@@ -1,6 +1,8 @@
 #include "./include/neural_network.h"
 #include "include/layer.h"
 #include "include/matrix.h"
+#include <cmath>
+#include <cstddef>
 
 using namespace Neural;
 
@@ -15,8 +17,17 @@ double Network::train(Matrix &X, Matrix &Y, float learning_rate, int iters,
                       int loss_function) {
   for (int i = 0; i < iters; i++) {
     this->feed(X);
-    float loss =
-        (this->output - Y).dot(this->output - Y).sum() * 0.5 / X.rows();
+    // float loss =
+    //   (this->output - Y).dot(this->output - Y).sum() * 0.5 / X.rows();float loss = 0.f;
+    float loss = 0.f;
+    for (size_t i = 0; i < X.rows(); i++) {
+      for (size_t j = 0; j < Y.cols(); j++) {
+        loss -= Y(i, j) * std::log(this->output(i, j) + 1e-15);
+      }
+    }
+
+    loss = loss / X.rows();
+
     std::cout << "Iter: " << i << " Loss: " << loss << std::endl;
     if (loss_function < 0) {
       loss_function = 0;
@@ -25,9 +36,9 @@ double Network::train(Matrix &X, Matrix &Y, float learning_rate, int iters,
     if (loss_function == MSE_LOSS) {
       d_loss_output = (this->output - Y) / X.rows();
     }
-
-    d_loss_output = d_loss_output.dot(this->layers.back().derivative());
-
+    if (this->layers[this->layers.size() - 1].getActivationID() != SOFTMAX_ID) {
+      d_loss_output = d_loss_output.dot(this->layers.back().derivative());
+    }
     std::vector<Matrix> d_hiddens;
     std::vector<Matrix> d_weights;
     for (size_t i = 0; i < this->layers.size(); i++) {
@@ -68,7 +79,6 @@ double Network::train(Matrix &X, Matrix &Y, float learning_rate, int iters,
 
 Matrix &Network::feed(Matrix &input) {
   Matrix intermediate = this->layers[0].feed(input);
-
   for (size_t i = 1; i < this->layers.size(); i++) {
     intermediate = this->layers[i].feed(intermediate);
   }

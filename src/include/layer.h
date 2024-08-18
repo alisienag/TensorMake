@@ -21,7 +21,8 @@ class Layer {
     Matrix& getActivated();
 
     Matrix& getWeights();
-    Matrix& getBias() ;
+    Matrix& getBias();
+    int getActivationID();
  private:
     Matrix softmax(const Matrix&) const;
     Matrix sigmoid(const Matrix&) const;

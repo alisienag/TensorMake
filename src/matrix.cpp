@@ -18,15 +18,19 @@ Matrix::Matrix(size_t rows, size_t columns) {
   }
 }
 
-Matrix::Matrix(std::vector<std::vector<uint8_t>> data) {
+Matrix::Matrix(std::vector<std::vector<uint8_t>> data, bool normalise) {
   this->rowCount = data.size();
   this->colCount = data[0].size();
 
+  float divisor = 1.f;
+
+  if (normalise) {
+    divisor = 255.f;
+  }
+
   for (int i = 0; i < rowCount; i++) {
     for (int j = 0; j < colCount; j++) {
-      // this->data.push_back(static_cast<float>(static_cast<float>(data[
-      // vim.keymap.set("n", "<leader>ef", ":Neotree toggle focus<CR>")i][j]) /
-      // 255.f));
+      this->data.push_back(static_cast<float>(static_cast<float>(data[i][j]) / divisor));
     }
   }
 }
@@ -370,13 +374,13 @@ void Matrix::setValue(size_t row, size_t column, float value) {
 void Matrix::randomise(float start, float end) {
   srand(time(nullptr));
 
-  float total = std::abs(start) + std::abs(end);
+     float range = end - start;
+    size_t data_size = this->rowCount * this->colCount;
 
-  size_t data_size = this->rowCount * this->colCount;
-
-  for (size_t i = 0; i < data_size; i++) {
-    this->data[i] = start + ((static_cast<float>(rand()) / RAND_MAX) * total);
-  }
+    for (size_t i = 0; i < data_size; ++i) {
+        // Generate a random float within the range [start, end]
+        this->data[i] = start + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / range);
+    }
 }
 
 const std::string Matrix::format() const {
