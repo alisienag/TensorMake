@@ -14,7 +14,7 @@ A multi-layer perceptron framework written in pure C++. Allows for creating as m
 
 ## Installation
 
-Install my-project with npm
+Clone the project via git in the command line or just download straight from github.
 
 ```bash
   git clone https://github.com/alisienag/TensorMake/
