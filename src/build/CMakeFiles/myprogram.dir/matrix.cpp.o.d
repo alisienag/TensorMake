@@ -1,7 +1,7 @@
 CMakeFiles/myprogram.dir/matrix.cpp.o: \
- /home/Alisiena/Programming/cpp/TensorMake/src/matrix.cpp \
+ /home/Alisiena/Projects/cpp/TensorMake/src/matrix.cpp \
  /usr/include/stdc-predef.h \
- /home/Alisiena/Programming/cpp/TensorMake/src/./include/matrix.h \
+ /home/Alisiena/Projects/cpp/TensorMake/src/./include/matrix.h \
  /usr/include/c++/14.2.1/algorithm \
  /usr/include/c++/14.2.1/bits/stl_algobase.h \
  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++config.h \

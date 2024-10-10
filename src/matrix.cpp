@@ -10,7 +10,6 @@ Matrix::Matrix() {
 Matrix::Matrix(size_t rows, size_t columns) {
   this->rowCount = rows;
   this->colCount = columns;
-  // this->data = new float[rows * columns];
   for (size_t i = 0; i < rows; i++) {
     for (size_t j = 0; j < columns; j++) {
       this->data.push_back(0.f);
@@ -21,16 +20,14 @@ Matrix::Matrix(size_t rows, size_t columns) {
 Matrix::Matrix(std::vector<std::vector<uint8_t>> data, bool normalise) {
   this->rowCount = data.size();
   this->colCount = data[0].size();
-
   float divisor = 1.f;
-
   if (normalise) {
     divisor = 255.f;
   }
-
   for (int i = 0; i < rowCount; i++) {
     for (int j = 0; j < colCount; j++) {
-      this->data.push_back(static_cast<float>(static_cast<float>(data[i][j]) / divisor));
+      this->data.push_back(static_cast<float>(
+        static_cast<float>(data[i][j]) / divisor));
     }
   }
 }
@@ -38,7 +35,6 @@ Matrix::Matrix(std::vector<std::vector<uint8_t>> data, bool normalise) {
 Matrix::Matrix(std::vector<uint8_t> data) {
   this->rowCount = 1;
   this->colCount = data.size();
-  // this->data = new float[rows * columns];
   for (size_t i = 0; i < this->colCount; i++) {
     this->data.push_back(static_cast<float>(static_cast<float>(data.at(i))));
   }
@@ -96,7 +92,7 @@ Matrix Matrix::mul(float x) const {
   return result;
 }
 
-Matrix Matrix::parallel_mul(const Matrix &other, size_t thread_count,
+Matrix Matrix::parallel_mul(const Matrix &other, size_t user_thread_count,
                             unsigned int block_size) const {
   Matrix result(this->rowCount, other.cols());
 
@@ -123,26 +119,28 @@ Matrix Matrix::parallel_mul(const Matrix &other, size_t thread_count,
       }
     }
   };
-  if (this->rowCount % 2 == 0) {
+
+  size_t thread_count = user_thread_count;
+  if (this->rowCount % 2 == 0 && 2 <= user_thread_count) {
     thread_count = 2;
-    if (this->rowCount % 4 == 0) {
+    if (this->rowCount % 4 == 0 && 4 <= user_thread_count) {
       thread_count = 4;
-      if (this->rowCount % 8 == 0) {
+      if (this->rowCount % 8 == 0 && 4 <= user_thread_count) {
         thread_count = 8;
-        if (this->rowCount % 16 == 0) {
+        if (this->rowCount % 16 == 0 && 4 <= user_thread_count) {
           thread_count = 16;
-          if (this->rowCount % 32 == 0) {
+          if (this->rowCount % 32 == 0 && 4 <= user_thread_count) {
             thread_count = 32;
           }
-          if (this->rowCount % 64 == 0) {
+          if (this->rowCount % 64 == 0 && 4 <= user_thread_count) {
             thread_count = 64;
           }
         }
       }
     }
-  } else if (this->rowCount % 3 == 0) {
+  } else if (this->rowCount % 3 == 0 && 3 <= user_thread_count) {
     thread_count = 3;
-    if (this->rowCount % 6 == 0) {
+    if (this->rowCount % 6 == 0 && 6 <= user_thread_count) {
       thread_count = 6;
     }
   } else {
@@ -209,7 +207,7 @@ float &Matrix::operator()(size_t row, size_t col) {
   return this->data[row * this->colCount + col];
 }
 
-const float *Matrix::operator[](size_t rows) const { // DEPRECATED
+const float *Matrix::operator[](size_t rows) const {  // DEPRECATED
   if (rows > this->rowCount) {
     std::stringstream ss;
     ss << "Matrix indexing: " << rows << std::endl;
@@ -378,8 +376,8 @@ void Matrix::randomise(float start, float end) {
     size_t data_size = this->rowCount * this->colCount;
 
     for (size_t i = 0; i < data_size; ++i) {
-        // Generate a random float within the range [start, end]
         this->data[i] = start + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / range);
+        // Better randomisation will hopefully soon be implemented!
     }
 }
 

@@ -10,7 +10,7 @@
 
 class Layer {
  public:
-	Layer(size_t inputs, size_t outputs, size_t activation_id);
+  Layer(size_t inputs, size_t outputs, size_t activation_id);
 
     Matrix& feed(Matrix&);
 
@@ -23,6 +23,7 @@ class Layer {
     Matrix& getWeights();
     Matrix& getBias();
     int getActivationID();
+
  private:
     Matrix softmax(const Matrix&) const;
     Matrix sigmoid(const Matrix&) const;
@@ -31,10 +32,10 @@ class Layer {
     Matrix d_sigmoid(const Matrix&) const;
     Matrix d_reLU(const Matrix&) const;
 
-	Matrix weights;
+    Matrix weights;
     Matrix bias;
-	Matrix hidden;
-	Matrix activated;
+    Matrix hidden;
+    Matrix activated;
 
     int activation_id = 0;  // default is sigmoid
 };

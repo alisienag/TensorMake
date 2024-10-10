@@ -1,7 +1,7 @@
 CMakeFiles/myprogram.dir/main.cpp.o: \
- /home/Alisiena/Programming/cpp/TensorMake/src/main.cpp \
+ /home/Alisiena/Projects/cpp/TensorMake/src/main.cpp \
  /usr/include/stdc-predef.h \
- /home/Alisiena/Programming/cpp/TensorMake/src/./data/mnist.hpp \
+ /home/Alisiena/Projects/cpp/TensorMake/src/./data/mnist.hpp \
  /usr/include/c++/14.2.1/string \
  /usr/include/c++/14.2.1/bits/requires_hosted.h \
  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -111,7 +111,7 @@ CMakeFiles/myprogram.dir/main.cpp.o: \
  /usr/include/c++/14.2.1/bits/uses_allocator.h \
  /usr/include/c++/14.2.1/bits/uses_allocator_args.h \
  /usr/include/c++/14.2.1/tuple /usr/include/c++/14.2.1/bits/ranges_util.h \
- /home/Alisiena/Programming/cpp/TensorMake/src/./data/../include/matrix.h \
+ /home/Alisiena/Projects/cpp/TensorMake/src/./data/../include/matrix.h \
  /usr/include/c++/14.2.1/algorithm \
  /usr/include/c++/14.2.1/bits/stl_algo.h \
  /usr/include/c++/14.2.1/bits/algorithmfwd.h \
@@ -219,7 +219,7 @@ CMakeFiles/myprogram.dir/main.cpp.o: \
  /usr/include/c++/14.2.1/bits/random.tcc /usr/include/c++/14.2.1/numeric \
  /usr/include/c++/14.2.1/bits/stl_numeric.h \
  /usr/include/c++/14.2.1/pstl/glue_numeric_defs.h \
- /home/Alisiena/Programming/cpp/TensorMake/src/./data/../mnist/mnist_reader.hpp \
+ /home/Alisiena/Projects/cpp/TensorMake/src/./data/../mnist/mnist_reader.hpp \
  /usr/include/c++/14.2.1/fstream /usr/include/c++/14.2.1/bits/codecvt.h \
  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
@@ -235,7 +235,7 @@ CMakeFiles/myprogram.dir/main.cpp.o: \
  /usr/include/c++/14.2.1/backward/auto_ptr.h \
  /usr/include/c++/14.2.1/bits/ranges_uninitialized.h \
  /usr/include/c++/14.2.1/pstl/glue_memory_defs.h \
- /home/Alisiena/Programming/cpp/TensorMake/src/./data/../mnist/mnist_reader_common.hpp \
- /home/Alisiena/Programming/cpp/TensorMake/src/./data/../mnist/mnist_utils.hpp \
- /home/Alisiena/Programming/cpp/TensorMake/src/./include/neural_network.h \
- /home/Alisiena/Programming/cpp/TensorMake/src/./include/./layer.h
+ /home/Alisiena/Projects/cpp/TensorMake/src/./data/../mnist/mnist_reader_common.hpp \
+ /home/Alisiena/Projects/cpp/TensorMake/src/./data/../mnist/mnist_utils.hpp \
+ /home/Alisiena/Projects/cpp/TensorMake/src/./include/neural_network.h \
+ /home/Alisiena/Projects/cpp/TensorMake/src/./include/./layer.h

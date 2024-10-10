@@ -58,7 +58,6 @@ Matrix& Layer::getBias() {
 
 Matrix Layer::softmax(const Matrix& input) const {
     Matrix result(input.rows(), input.cols());
-    
     std::vector<float> sum_of_rows;
 
     for (size_t i = 0; i < input.rows(); i++) {
@@ -98,8 +97,6 @@ Matrix Layer::d_reLU(const Matrix &input) const {
   for (int i = 0; i < input.cols() * input.rows(); i++) {
     if (input.getData()[i] > 0) {
       result.getData()[i] = 1;
-    } else {
-      // do nothing as it is already zero :D
     }
   }
   return result;
